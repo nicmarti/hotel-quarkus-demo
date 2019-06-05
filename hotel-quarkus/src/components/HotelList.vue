@@ -24,6 +24,7 @@
                 </ul>
 
                 <button class="button-choose pure-button">Choose</button>
+                <router-link :to="`/hotels/${hotel.id}`">Details</router-link>
             </div>
         </div>
     </div>

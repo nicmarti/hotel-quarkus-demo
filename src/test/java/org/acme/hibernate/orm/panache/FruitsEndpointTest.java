@@ -12,33 +12,32 @@ public class FruitsEndpointTest {
 
     @Test
     public void testListAllFruits() {
-        //List all, should have all 3 fruits the database has initially:
+        //List all, should have some hotel initially
         given()
-              .when().get("/fruits")
+              .when().get("/hotels")
               .then()
               .statusCode(200)
               .body(
-                    containsString("Cherry"),
-                    containsString("Apple"),
-                    containsString("Banana")
+                    containsString("Maillot"),
+                    containsString("Méridien")
                     );
 
-        //Delete the Cherry:
+        //Delete the Marriot Saint-Jacques:
         given()
-              .when().delete("/fruits/1")
+              .when().delete("/hotels/1")
               .then()
               .statusCode(204)
               ;
 
         //List all, cherry should be missing now:
         given()
-              .when().get("/fruits")
+              .when().get("/hotels")
               .then()
               .statusCode(200)
               .body(
-                    not( containsString("Cherry") ),
-                    containsString("Apple"),
-                    containsString("Banana")
+                    not( containsString("Marriot Saint-Jacques") ),
+                    containsString("Mercure le Méridien"),
+                    containsString("Hyatt Porte Maillot")
               );
     }
 

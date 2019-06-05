@@ -1,7 +1,8 @@
 # Quarkus demo: Hibernate ORM with Panache and RESTEasy
 
-This is a minimal CRUD service exposing a couple of endpoints over REST,
-with a front-end based on Angular so you can play with it from your browser.
+This is a minimal CRUD service exposing a couple of endpoints over REST with a front-end based on Vue.js
+
+Original version [available here](https://github.com/quarkusio/quarkus-quickstarts/tree/master/hibernate-orm-panache-resteasy)
 
 While the code is surprisingly simple, under the hood this is using:
  - RESTEasy to expose the REST endpoints
@@ -18,8 +19,6 @@ To compile and run this demo you will need:
 - GraalVM - see [our Building native image guide](https://quarkus.io/guides/building-native-image-guide)
 - Apache Maven `3.5.3+`
 
-In addition, you will need either a PostgreSQL database, or Docker to run one.
-
 If you don't have GraalVM installed, you can download it here:
 
 <https://github.com/oracle/graal/releases>
@@ -33,8 +32,10 @@ You should then use this JDK to run the Maven build.
 
 ## Building the demo
 
-After having set GraalVM as your JVM, launch the Maven build on
-the checked out sources of this demo:
+After having set GraalVM as your JVM, go to 'hotel-quarkus' subfolder and build a static version of the site with `npm install && npm build dist`.
+See below the 'Frontend development' documentation for more details.
+
+Once the static part is built and you have copied the hotel-quarkus/dist folder to the src/resources/META-INF/resources, you can start the Quarkus app.
 
 > mvn package
 

@@ -38,7 +38,5 @@
 </script>
 
 <style scoped>
-    .hotel-image{
 
-    }
 </style>

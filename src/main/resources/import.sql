@@ -1,3 +1,3 @@
-INSERT INTO fruit(id, name) VALUES (nextval('hibernate_sequence'), 'Cherry')
-INSERT INTO fruit(id, name) VALUES (nextval('hibernate_sequence'), 'Apple')
-INSERT INTO fruit(id, name) VALUES (nextval('hibernate_sequence'), 'Banana')
+INSERT INTO hotel(id, name, address, city, zip, hotelImageURL, price) VALUES (nextval('hibernate_sequence'), 'Marriot Saint-Jacques', '120 Boulevard Saint-Jacques', 'Paris', 75008,'http://localhost:8080/assets/hotel_01.png',203.20)
+INSERT INTO hotel(id, name, address, city, zip, hotelImageURL, price) VALUES (nextval('hibernate_sequence'), 'Hyatt Porte Maillot', '1 Place de la porte Maillot', 'Paris', 75009,'http://localhost:8080/assets/hotel_02.png',110.50)
+INSERT INTO hotel(id, name, address, city, zip, hotelImageURL, price) VALUES (nextval('hibernate_sequence'), 'Mercure le Méridien', '12 Boulevard Saint-Martin', 'Paris', 75010,'http://localhost:8080/assets/hotel_03.png',189.00)

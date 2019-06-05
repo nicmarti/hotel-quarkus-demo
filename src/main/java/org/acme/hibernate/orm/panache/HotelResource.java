@@ -22,53 +22,53 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import io.quarkus.panache.common.Sort;
 
-@Path("fruits")
+@Path("hotels")
 @ApplicationScoped
 @Produces("application/json")
 @Consumes("application/json")
-public class FruitResource {
+public class HotelResource {
 
     @GET
-    public List<Fruit> get() {
-        return Fruit.listAll(Sort.by("name"));
+    public List<Hotel> get() {
+        return Hotel.listAll(Sort.by("name"));
     }
 
     @GET
     @Path("{id}")
-    public Fruit getSingle(@PathParam Long id) {
-        Fruit entity = Fruit.findById(id);
+    public Hotel getSingle(@PathParam Long id) {
+        Hotel entity = Hotel.findById(id);
         if (entity == null) {
-            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+            throw new WebApplicationException("Hotel with id of " + id + " does not exist.", 404);
         }
         return entity;
     }
 
     @POST
     @Transactional
-    public Response create(Fruit fruit) {
-        if (fruit.id != null) {
+    public Response create(Hotel hotel) {
+        if (hotel.id != null) {
             throw new WebApplicationException("Id was invalidly set on request.", 422);
         }
 
-        fruit.persist();
-        return Response.ok(fruit).status(201).build();
+        hotel.persist();
+        return Response.ok(hotel).status(201).build();
     }
 
     @PUT
     @Path("{id}")
     @Transactional
-    public Fruit update(@PathParam Long id, Fruit fruit) {
-        if (fruit.name == null) {
-            throw new WebApplicationException("Fruit Name was not set on request.", 422);
+    public Hotel update(@PathParam Long id, Hotel hotel) {
+        if (hotel.name == null) {
+            throw new WebApplicationException("Hotel Name was not set on request.", 422);
         }
 
-        Fruit entity = Fruit.findById(id);
+        Hotel entity = Hotel.findById(id);
 
         if (entity == null) {
-            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+            throw new WebApplicationException("Hotel with id of " + id + " does not exist.", 404);
         }
 
-        entity.name = fruit.name;
+        entity.name = hotel.name;
 
         return entity;
     }
@@ -77,9 +77,9 @@ public class FruitResource {
     @Path("{id}")
     @Transactional
     public Response delete(@PathParam Long id) {
-        Fruit entity = Fruit.findById(id);
+        Hotel entity = Hotel.findById(id);
         if (entity == null) {
-            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+            throw new WebApplicationException("Hotel with id of " + id + " does not exist.", 404);
         }
         entity.delete();
         return Response.status(204).build();

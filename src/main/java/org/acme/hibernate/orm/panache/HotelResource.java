@@ -1,6 +1,5 @@
 package org.acme.hibernate.orm.panache;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;

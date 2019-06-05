@@ -23,11 +23,15 @@ public class Hotel extends PanacheEntity {
     public String name;
 
     public String address;
-    public String city;
+
 
     @Column(length = 5)
     public String zip;
-    public String country;
+
+    @NotNull
+    public String city;
+
+    public String hotelImageURL;
 
     public BigDecimal price;
 

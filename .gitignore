@@ -1,0 +1,27 @@
+# Projet
+*.swp
+out/
+*~
+*.log
+tmp
+dump
+.DS_Store
+
+# Intellij
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Eclipse
+.settings
+.cache
+.project
+.classpath
+.scala_dependencies
+bin
+
+target
+logs
+ObjectStore
+

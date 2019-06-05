@@ -110,3 +110,39 @@ Navigate to:
 <http://localhost:8080/index.html>
 
 Have fun, and join the team of contributors!
+
+# Frontend with Vue.JS
+
+The `hotel-quarkus` folder is a Vue 3.8.2 web app application, createad with the Vue CLI tools.
+
+Pre-requisite  : 
+ - npm 6.9.0+
+ 
+## Project setup
+
+This will download all dependencies :
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+Serve in dev mode, with hot reload at localhost:8080
+
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+
+You can then copy this folder into src/main/resources/META-INF/resources
+` cp -R dist/* ../src/main/resources/META-INF/resources/`
+
+
+End of document

@@ -24,7 +24,6 @@ public class Hotel extends PanacheEntity {
 
     public String address;
 
-
     @Column(length = 5)
     public String zip;
 
@@ -36,10 +35,6 @@ public class Hotel extends PanacheEntity {
     public BigDecimal price;
 
     public Hotel() {
-    }
-
-    public Hotel(String name) {
-        this.name = name;
     }
 
 }

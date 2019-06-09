@@ -8,7 +8,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
-public class FruitsEndpointTest {
+public class HotelsEndpointTest {
 
     @Test
     public void testListAllFruits() {
@@ -21,24 +21,6 @@ public class FruitsEndpointTest {
                     containsString("Maillot"),
                     containsString("Méridien")
                     );
-
-        //Delete the Marriot Saint-Jacques:
-        given()
-              .when().delete("/hotels/1")
-              .then()
-              .statusCode(204)
-              ;
-
-        //List all, cherry should be missing now:
-        given()
-              .when().get("/hotels")
-              .then()
-              .statusCode(200)
-              .body(
-                    not( containsString("Marriot Saint-Jacques") ),
-                    containsString("Mercure le Méridien"),
-                    containsString("Hyatt Porte Maillot")
-              );
     }
 
 }

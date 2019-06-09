@@ -1,8 +1,11 @@
-# Quarkus demo: Hibernate ORM with Panache and RESTEasy
+# Quarkus Hotel
 
-This is a minimal CRUD service exposing a couple of endpoints over REST with a front-end based on Vue.js
+### Another Quarkus demo: Hibernate ORM with Panache, RESTEasy and Vue.js
 
-Original version [available here](https://github.com/quarkusio/quarkus-quickstarts/tree/master/hibernate-orm-panache-resteasy)
+Back in 2009, JBoss Seam, Spring JSF and Play Framework 1 had a cool demo based on a simple Hotel & Booking reservation system.
+We decided to build a new version on top of [Quarkus](https://quarkus.io/). 
+The application has a simple backend, exposing a couple of endpoints over REST. 
+The project was bootstraped from [hibernate-orm-panache-resteasy demo].(https://github.com/quarkusio/quarkus-quickstarts/tree/master/hibernate-orm-panache-resteasy)
 
 While the code is surprisingly simple, under the hood this is using:
  - RESTEasy to expose the REST endpoints
@@ -13,11 +16,15 @@ While the code is surprisingly simple, under the hood this is using:
  - Infinispan based caching
  - All safely coordinated by the Narayana Transaction Manager
 
+# Step by step
+
 ## Requirements
 
 To compile and run this demo you will need:
 - GraalVM - see [our Building native image guide](https://quarkus.io/guides/building-native-image-guide)
 - Apache Maven `3.5.3+`
+- npm v6.9.0+ for the frontend Vue.JS source code 
+- docker 
 
 If you don't have GraalVM installed, you can download it here:
 
@@ -29,19 +36,9 @@ and `GRAALVM_HOME` environment variables to it.
 
 You should then use this JDK to run the Maven build.
 
+Note : there is a bug with Graal VM 0.16 and Quarkus 
 
-## Building the demo
-
-After having set GraalVM as your JVM, go to 'hotel-quarkus' subfolder and build a static version of the site with `npm install && npm build dist`.
-See below the 'Frontend development' documentation for more details.
-
-Once the static part is built and you have copied the hotel-quarkus/dist folder to the src/resources/META-INF/resources, you can start the Quarkus app.
-
-> mvn package
-
-## Running the demo
-
-### Prepare a PostgreSQL instance
+## Database with Docker
 
 First we will need a PostgreSQL database; you can launch one easily if you have Docker installed:
 
@@ -52,6 +49,36 @@ Alternatively you can setup a PostgreSQL instance in any another way.
 The connection properties of the Agroal datasource are configured in the standard Quarkus configuration file, which you will find in
 `src/main/resources/application.properties`.
 
+## Build and start the frontend
+
+Pre-requisites : npm v6.9.0 
+
+> cd hotel-quarkus
+
+> npm install
+
+You can then start the frontend, this start a node server on port 8081 :
+
+> npm run serve
+
+You can also build and package the frontend, then copy the generated files to the backend folder :
+
+> cd hotel-quarkus
+
+> npm install
+
+> npm run build
+
+> cp -R dist/* ../src/main/resources/META-INF/resources/
+
+## Build the backend
+
+From the top directory hotel-quarkus-demo you can start the `package` target. The docker-maven-plugin starts a Docker 
+container with postgreSQL. If a container was previously started, use `docker ps` and `docker stop <container_id>` to stop id.
+The docker plugin is used to span a database for unit tests.
+
+> mvn package
+
 ### Run Quarkus in developer mode
 
 To run the application in interactive mode (developer mode):
@@ -59,9 +86,6 @@ To run the application in interactive mode (developer mode):
 >  mvn compile quarkus:dev
 
 In this mode you can make changes to the code and have the changes immediately applied, by just refreshing your browser.
-
-    Hot reload works even when modifying your JPA entities.
-    Try it! Even the database schema will be updated on the fly.
 
 ### Run Quarkus in JVM mode
 
@@ -75,8 +99,6 @@ Then run it:
 
 > java -jar ./target/hibernate-orm-panache-resteasy-1.0-SNAPSHOT-runner.jar
 
-    Have a look at how fast it boots.
-    Or measure total native memory consumption...
 
 ### Run Quarkus as a native application
 
@@ -93,56 +115,12 @@ After getting a cup of coffee, you'll be able to run this binary directly:
 
 > ./target/hibernate-orm-panache-resteasy-1.0-SNAPSHOT-runner
 
-    Please brace yourself: don't choke on that fresh cup of coffee you just got.
-    
-    Now observe the time it took to boot, and remember: that time was mostly spent to generate the tables in your database and import the initial data.
-    
-    Next, maybe you're ready to measure how much memory this service is consuming.
-
-N.B. This implies all dependencies have been compiled to native;
-that's a whole lot of stuff: from the bytecode enhancements that Panache
-applies to your entities, to the lower level essential components such as the PostgreSQL JDBC driver, the Undertow webserver.
 
 ## See the demo in your browser
 
-Navigate to:
+Navigate to: [http://localhost:8081](http://localhost:8081) this is the Vue.js frontend application.
 
-<http://localhost:8080/index.html>
-
-Have fun, and join the team of contributors!
-
-# Frontend with Vue.JS
-
-The `hotel-quarkus` folder is a Vue 3.8.2 web app application, createad with the Vue CLI tools.
-
-Pre-requisite  : 
- - npm 6.9.0+
- 
-## Project setup
-
-This will download all dependencies :
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-Serve in dev mode, with hot reload at localhost:8080
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-
-You can then copy this folder into src/main/resources/META-INF/resources
-` cp -R dist/* ../src/main/resources/META-INF/resources/`
-
+To see the backend in action : 
+[http://localhost:8080/hotels](http://localhost:8080/hotels)
 
 End of document

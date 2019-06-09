@@ -23,8 +23,7 @@
                     <li>Valid for one standard room</li>
                 </ul>
 
-                <button class="button-choose pure-button">Choose</button>
-                <router-link :to="`/hotels/${hotel.id}`">Details</router-link>
+                <router-link :to="`/hotels/${hotel.hotelId}`" class="button-choose pure-button" >Details</router-link>
             </div>
         </div>
     </div>

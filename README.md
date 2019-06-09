@@ -118,7 +118,8 @@ After getting a cup of coffee, you'll be able to run this binary directly:
 
 ## See the demo in your browser
 
-Navigate to: [http://localhost:8081](http://localhost:8081) this is the Vue.js frontend application.
+Navigate to: [http://localhost:8081](http://localhost:8081) this is the Vue.js frontend application. Please note that node will use port 8080 if the 
+java backend is not running.
 
 To see the backend in action : 
 [http://localhost:8080/hotels](http://localhost:8080/hotels)

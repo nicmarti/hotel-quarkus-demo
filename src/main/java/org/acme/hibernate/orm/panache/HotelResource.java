@@ -1,25 +1,15 @@
 package org.acme.hibernate.orm.panache;
 
-import java.util.List;
+import io.quarkus.panache.common.Sort;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.json.Json;
-import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
-
-import io.quarkus.panache.common.Sort;
+import java.util.List;
 
 @Path("hotels")
 @ApplicationScoped
@@ -33,18 +23,17 @@ public class HotelResource {
     }
 
     @GET
-    @Path("{id}")
-    public Hotel getSingle(@PathParam Long id) {
-        Hotel entity = Hotel.findById(id);
+    @Path("{hotelId}")
+    public Hotel getDetails(@PathParam String hotelId) {
+        Hotel entity = Hotel.find("hotelId",hotelId).firstResult();
         if (entity == null) {
-            throw new WebApplicationException("Hotel with id of " + id + " does not exist.", 404);
+            throw new WebApplicationException("Hotel with hotelId of " + hotelId + " does not exist.", 404);
         }
         return entity;
     }
 
     @Provider
     public static class ErrorMapper implements ExceptionMapper<Exception> {
-
         @Override
         public Response toResponse(Exception exception) {
             int code = 500;

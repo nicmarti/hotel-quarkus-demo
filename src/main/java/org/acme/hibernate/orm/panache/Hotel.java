@@ -10,13 +10,13 @@ import javax.validation.constraints.Size;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Cacheable
 public class Hotel extends PanacheEntity {
 
-    @Id
-    public Long id;
+    public String hotelId;
 
     @NotNull
     @Size(max=50)
@@ -33,6 +33,9 @@ public class Hotel extends PanacheEntity {
     public String hotelImageURL;
 
     public BigDecimal price;
+
+    @Column(length=10485760)
+    public String description;
 
     public Hotel() {
     }

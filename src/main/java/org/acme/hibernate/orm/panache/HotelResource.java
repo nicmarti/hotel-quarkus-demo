@@ -42,48 +42,6 @@ public class HotelResource {
         return entity;
     }
 
-    @POST
-    @Transactional
-    public Response create(Hotel hotel) {
-        if (hotel.id != null) {
-            throw new WebApplicationException("Id was invalidly set on request.", 422);
-        }
-
-        hotel.persist();
-        return Response.ok(hotel).status(201).build();
-    }
-
-    @PUT
-    @Path("{id}")
-    @Transactional
-    public Hotel update(@PathParam Long id, Hotel hotel) {
-        if (hotel.name == null) {
-            throw new WebApplicationException("Hotel Name was not set on request.", 422);
-        }
-
-        Hotel entity = Hotel.findById(id);
-
-        if (entity == null) {
-            throw new WebApplicationException("Hotel with id of " + id + " does not exist.", 404);
-        }
-
-        entity.name = hotel.name;
-
-        return entity;
-    }
-
-    @DELETE
-    @Path("{id}")
-    @Transactional
-    public Response delete(@PathParam Long id) {
-        Hotel entity = Hotel.findById(id);
-        if (entity == null) {
-            throw new WebApplicationException("Hotel with id of " + id + " does not exist.", 404);
-        }
-        entity.delete();
-        return Response.status(204).build();
-    }
-
     @Provider
     public static class ErrorMapper implements ExceptionMapper<Exception> {
 

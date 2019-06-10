@@ -3,14 +3,12 @@ package org.acme.hibernate.orm.panache;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Cacheable

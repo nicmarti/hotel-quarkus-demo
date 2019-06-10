@@ -19,8 +19,4 @@
 </script>
 
 <style scoped>
-    .hotelBox {
-        padding: 20px 30px;
-        border: 1px solid #cfcfcf;
-    }
 </style>

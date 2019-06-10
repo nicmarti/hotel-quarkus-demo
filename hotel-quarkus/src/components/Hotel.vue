@@ -2,9 +2,10 @@
     <div class="hotelSimple pure-g">
         <div class="pure-u-1-3">
             <img v-bind:src="hotel.hotelImageURL" class="pure-image">
+            <bookingCounter v-bind:total="bookingCounterVal"></bookingCounter>
         </div>
         <div class="pure-u-1-3">
-        <h2><strong>{{hotel.name}}</strong></h2>
+        <h2><strong>{{hotel.name}} {{hotel.id}}</strong></h2>
         <p>{{hotel.zip}} {{hotel.city}}</p>
         <strong>{{hotel.price}} &euro;</strong>
         <p>{{hotel.description}}</p>
@@ -28,15 +29,16 @@
 </template>
 
 <script>
+    import bookingCounter from '@/components/BookingCounter';
     import axios from 'axios';
 
     export default {
         name: 'hotel',
+        components: {bookingCounter},
         data() {
             return {
-                hotel: {
-                    name : "Loading details..."
-                },
+                hotel: '',
+                bookingCounterVal: 0,
                 errors:[]
             }
         },
@@ -49,7 +51,15 @@
                 })
                 .catch(e => {
                     this.errors.push(e)
-            })
+                });
+
+            axios.get(`http://localhost:8080/bookings/counterForHotel/${id}`)
+                .then(response => {
+                    this.bookingCounterVal = response.data;
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                });
 
         }
     };

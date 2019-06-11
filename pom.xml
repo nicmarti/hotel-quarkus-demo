@@ -37,9 +37,14 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-jsonb</artifactId>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>0.9.0</version>
         </dependency>
 
         <!-- Testing: -->
@@ -111,7 +116,7 @@
                                     <port>5432:5432</port>
                                 </ports>
                                 <log>
-                                    <prefix>PostgreSQL: </prefix>
+                                    <prefix>PostgreSQL:</prefix>
                                     <date>default</date>
                                     <color>cyan</color>
                                 </log>
@@ -184,7 +189,9 @@
                                 </goals>
                                 <configuration>
                                     <systemProperties>
-                                        <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                                        <native.image.path>
+                                            ${project.build.directory}/${project.build.finalName}-runner
+                                        </native.image.path>
                                     </systemProperties>
                                 </configuration>
                             </execution>

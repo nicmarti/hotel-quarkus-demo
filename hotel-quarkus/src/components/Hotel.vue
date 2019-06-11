@@ -5,7 +5,7 @@
             <h1><strong>{{hotel.name}}</strong></h1>
             <p>{{hotel.zip}} {{hotel.city}}</p>
             <strong>{{hotel.price}} &euro;</strong>
-            <p>{{hotel.description}}</p>
+            <span class="hotelDescription">{{hotel.description}}</span>
         </div>
         <div class="pure-u-1-3">
             <h2>Room amenities</h2>
@@ -28,6 +28,11 @@
                         <b>Please correct the following error(s):</b>
                         <ul>
                             <li v-for="error in formErrors">{{ error }}</li>
+                        </ul>
+                    </div>
+                    <div v-if="formSuccess.length" class="success">
+                          <ul>
+                            <li v-for="msg in formSuccess">{{ msg }}</li>
                         </ul>
                     </div>
                     <input type="hidden" name="hotelId" v-bind:value="hotel.hotelId">
@@ -71,6 +76,7 @@
                 bookingCounterVal: 0,
                 errors: [],
                 formErrors: [],
+                formSuccess: [],
                 checkin: null,
                 checkout: null,
             }
@@ -89,6 +95,7 @@
         methods: {
             checkForm: function (e) {
                 this.formErrors = [];
+                this.formSuccess = [];
                 e.preventDefault();
                 let currentObj = this;
                 let hotelId = this.$route.params.id;
@@ -96,20 +103,23 @@
                 if (this.checkin && this.checkout) {
                     this.formErrors.push('sending booking request...');
                     // This has to map BookingRequest dto
-                    let bookingRequest = {"checkinDate":this.checkin,"checkoutDate":this.checkout};
+                    let bookingRequest = {"hotelId":hotelId,"checkinDate":this.checkin,"checkoutDate":this.checkout};
                     axios.post(
                         'http://localhost:8080/bookingService/hotel/' + hotelId, bookingRequest
                     ).then(function (response) {
-                        currentObj.formErrors.push(response.data);
+                        currentObj.formErrors = [];
+                        currentObj.formSuccess.push(response.data.result);
                     }).catch(function (error) {
-                        currentObj.formErrors.push(error);
+                        console.log("Server error "+ error.response);
+                        let reason = error.response.data.error;
+                        currentObj.formErrors.push(reason);
                     });
                 }
                 if (!this.checkin) {
-                    this.formErrors.push('Checkin date required.');
+                    this.formErrors.push('Check-in date required.');
                 }
                 if (!this.checkout) {
-                    this.formErrors.push('Checkout date required.');
+                    this.formErrors.push('Check-out date required.');
                 }
                 return false;
             }
@@ -121,6 +131,13 @@
     .hotelSimple {
         padding: 20px 30px;
         border: 1px solid #cfcfcf;
+    }
+    .hotelDescription{
+        text-align: justify;
+        font-size: 0.9em;
+        display: inline-block;
+        line-height: 1.3em;
+        padding: 5px 10px;
     }
 </style>
 

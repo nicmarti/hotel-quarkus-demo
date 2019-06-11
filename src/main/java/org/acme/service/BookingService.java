@@ -1,5 +1,6 @@
 package org.acme.service;
 
+import io.vavr.control.Either;
 import org.acme.dto.BookingRequest;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
@@ -32,6 +33,13 @@ public class BookingService {
         }
 
         System.out.println("Booking request " + bookingRequest);
+
+        // With scala we could fold
+        Either<String,String> erroMsgOrOk = bookingRequest.isValid();
+        if(erroMsgOrOk.isLeft()){
+            throw new WebApplicationException(erroMsgOrOk.getLeft(), 400);
+        }
+
         return Response.ok("{\"result\":\"booking created\"}").status(200).build();
     }
 

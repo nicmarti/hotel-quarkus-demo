@@ -20,7 +20,7 @@
         methods: {
             getCounter() {
                 let id = this.$route.params.id;
-                axios.get(`http://localhost:8080/bookings/counterForHotel/${id}`)
+                axios.get(`http://localhost:8080/bookings/hotel/${id}/counter`)
                     .then(response => {
                         this.bookingCounter = response.data;
                     })

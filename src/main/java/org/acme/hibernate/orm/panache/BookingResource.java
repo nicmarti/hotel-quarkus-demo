@@ -5,15 +5,19 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A service for read-only actions.
+ */
 @Path("bookings")
 @ApplicationScoped
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class BookingResource {
     @GET
     @Path("hotel/{id}")
@@ -28,14 +32,13 @@ public class BookingResource {
     }
 
     @GET
-    @Path("counterForHotel/{hotelId}")
+    @Path("hotel/{hotelId}/counter")
     public Long counterForHotel(@PathParam String hotelId) {
         if (hotelId == null) {
             throw new WebApplicationException("hotelId must be specified", 422);
         }
-        return Booking.count("hotelid",hotelId);
+        return Booking.count("hotelid", hotelId);
     }
-
 
     @GET
     @Path("ref/{bookingRef}")
@@ -46,4 +49,5 @@ public class BookingResource {
         }
         return query.firstResult();
     }
+
 }

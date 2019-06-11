@@ -1,36 +1,38 @@
-package org.acme.hibernate.orm.panache;
+package org.acme.service;
 
-import io.quarkus.panache.common.Sort;
+import org.acme.dto.BookingRequest;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.json.Json;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.util.List;
 
-@Path("hotels")
+/**
+ * Service to create Booking request object.
+ * Use application/json to aad
+ *
+ * @author created by N.Martignole, Lunatech, on 2019-06-11.
+ */
+@Path("bookingService")
 @ApplicationScoped
-@Produces("application/json")
-@Consumes("application/json")
-public class HotelResource {
-
-    @GET
-    public List<Hotel> get() {
-        return Hotel.listAll(Sort.by("name"));
-    }
-
-    @GET
-    @Path("{hotelId}")
-    public Hotel getDetails(@PathParam String hotelId) {
-        Hotel entity = Hotel.find("hotelId",hotelId).firstResult();
-        if (entity == null) {
-            throw new WebApplicationException("Hotel with hotelId of " + hotelId + " does not exist.", 404);
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public class BookingService {
+    @POST
+    @Path("hotel/{hotelId}")
+    public Response create(@PathParam String hotelId,
+                           BookingRequest bookingRequest) {
+        System.out.println("create new booking for " + hotelId);
+        if (hotelId == null) {
+            throw new WebApplicationException("hotelId must be specified", 422);
         }
-        return entity;
+
+        System.out.println("Booking request " + bookingRequest);
+        return Response.ok("{\"result\":\"booking created\"}").status(200).build();
     }
 
     @Provider
@@ -47,4 +49,5 @@ public class HotelResource {
         }
 
     }
+
 }

@@ -1,7 +1,8 @@
 <template>
     <div class="bookingCounter">
-        <div v-if="bookingCounter">This hotel was booked {{bookingCounter}} times</div>
-        <div v-else>No recent booking for this hotel</div>
+        <div v-if="bookingCounter === 1">This hotel was booked one time</div>
+        <div v-if="bookingCounter > 1">This hotel was booked {{bookingCounter}} times</div>
+        <div v-if="bookingCounter < 1">No recent booking for this hotel</div>
     </div>
 </template>
 
@@ -10,14 +11,26 @@
 
     export default {
         name: 'bookingCounter',
-        props: {
-            total: Number
-        },
         data() {
             return {
-                bookingCounter: this.total,
+                bookingCounter: 0,
                 errors: [],
             }
+        },
+        methods: {
+            getCounter() {
+                let id = this.$route.params.id;
+                axios.get(`http://localhost:8080/bookings/counterForHotel/${id}`)
+                    .then(response => {
+                        this.bookingCounter = response.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+            }
+        },
+        created() {
+            this.getCounter()
         }
     };
 </script>

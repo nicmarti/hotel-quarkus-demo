@@ -2,7 +2,7 @@
     <div class="hotelSimple pure-g">
         <div class="pure-u-1-3">
             <img v-bind:src="hotel.hotelImageURL" class="pure-image">
-            <bookingCounter v-bind:total="bookingCounterVal"></bookingCounter>
+            <bookingCounter>Compteur</bookingCounter>
         </div>
         <div class="pure-u-1-3">
         <h2><strong>{{hotel.name}} {{hotel.id}}</strong></h2>
@@ -52,15 +52,6 @@
                 .catch(e => {
                     this.errors.push(e)
                 });
-
-            axios.get(`http://localhost:8080/bookings/counterForHotel/${id}`)
-                .then(response => {
-                    this.bookingCounterVal = response.data;
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                });
-
         }
     };
 </script>

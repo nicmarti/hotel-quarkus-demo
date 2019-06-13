@@ -21,7 +21,7 @@ public class BookingRequest {
     public String toString() {
         return "BookingRequest hotelId=" + this.hotelId +
                 " checkinDate=" + this.checkinDate +
-                " checkoutDate" + this.checkoutDate;
+                " checkoutDate=" + this.checkoutDate;
     }
 
     public String getHotelId() {

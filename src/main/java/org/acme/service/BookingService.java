@@ -27,14 +27,12 @@ public class BookingService {
     @Path("hotel/{hotelId}")
     public Response create(@PathParam String hotelId,
                            BookingRequest bookingRequest) {
-        System.out.println("create new booking for " + hotelId);
         if (hotelId == null) {
             throw new WebApplicationException("hotelId must be specified", 422);
         }
 
         System.out.println("Booking request " + bookingRequest);
 
-        // With scala we could fold
         Either<String,String> erroMsgOrOk = bookingRequest.isValid();
         if(erroMsgOrOk.isLeft()){
             throw new WebApplicationException(erroMsgOrOk.getLeft(), 400);

@@ -27,8 +27,6 @@ public class CORSFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestContext,
                        ContainerResponseContext responseContext) throws IOException {
-        System.out.println("Filter CORS");
-
         String origin = requestContext.getHeaderString(CorsHeaders.ORIGIN);
         if (origin == null) {
             return;
@@ -52,8 +50,7 @@ public class CORSFilter implements ContainerResponseFilter {
         }
     }
 
-    protected void preflight(String origin, ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        checkOrigin(requestContext, origin);
+    private void preflight(String origin, ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         System.out.println("Filter CORS preflight check");
         responseContext.setStatus(200);
         responseContext.getHeaders().add(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
@@ -63,12 +60,4 @@ public class CORSFilter implements ContainerResponseFilter {
         responseContext.getHeaders().add("content-type", "text/html; charset=utf=8");
     }
 
-    protected void checkOrigin(ContainerRequestContext requestContext, String origin) {
-        String allowedOrigins = "*";
-        if (!allowedOrigins.contains("*") && !allowedOrigins.contains(origin)) {
-            System.out.println("Origin error cors.failure");
-            requestContext.setProperty("cors.failure", true);
-            throw new ForbiddenException(Messages.MESSAGES.originNotAllowed(origin));
-        }
-    }
 }

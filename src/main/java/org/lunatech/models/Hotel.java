@@ -1,4 +1,4 @@
-package org.acme.hibernate.orm.panache;
+package org.lunatech.models;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;

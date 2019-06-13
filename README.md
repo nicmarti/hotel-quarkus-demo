@@ -124,4 +124,8 @@ java backend is not running.
 To see the backend in action : 
 [http://localhost:8080/hotels](http://localhost:8080/hotels)
 
+# Photos credits
+
+Photos donwloaded from [https://www.pexels.com/]
+
 End of document

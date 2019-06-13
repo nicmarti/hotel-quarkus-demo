@@ -1,4 +1,4 @@
-package org.acme.dto;
+package org.lunatech.dto;
 
 import io.vavr.control.Either;
 

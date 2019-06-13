@@ -1,17 +1,20 @@
-package org.acme.hibernate.orm.panache;
+package org.lunatech.readers;
 
 import io.quarkus.panache.common.Sort;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
+import org.lunatech.models.Hotel;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.json.Json;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import java.util.List;
 
+/**
+ * A resource service for read-only actions related to Hotels.
+ */
 @Path("hotels")
 @ApplicationScoped
 @Produces("application/json")
@@ -33,18 +36,4 @@ public class HotelResource {
         return entity;
     }
 
-    @Provider
-    public static class ErrorMapper implements ExceptionMapper<Exception> {
-        @Override
-        public Response toResponse(Exception exception) {
-            int code = 500;
-            if (exception instanceof WebApplicationException) {
-                code = ((WebApplicationException) exception).getResponse().getStatus();
-            }
-            return Response.status(code)
-                    .entity(Json.createObjectBuilder().add("error", exception.getMessage()).add("code", code).build())
-                    .build();
-        }
-
-    }
 }

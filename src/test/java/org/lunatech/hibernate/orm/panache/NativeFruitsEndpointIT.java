@@ -1,4 +1,4 @@
-package org.acme.hibernate.orm.panache;
+package org.lunatech.hibernate.orm.panache;
 
 import io.quarkus.test.junit.SubstrateTest;
 

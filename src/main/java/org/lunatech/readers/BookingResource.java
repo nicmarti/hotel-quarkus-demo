@@ -1,7 +1,8 @@
-package org.acme.hibernate.orm.panache;
+package org.lunatech.readers;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
+import org.lunatech.models.Booking;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;

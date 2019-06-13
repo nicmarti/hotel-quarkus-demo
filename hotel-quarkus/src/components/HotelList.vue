@@ -5,7 +5,7 @@
             <p>Discover our nice and superior list of hotels : </p>
         </div>
         <div class="pure-u-1 pure-u-md-1-3" v-for="hotel in hotels" :key="hotel.id">
-            <div class="pricing-table pricing-table-free">
+            <div class="pricing-table pricing-table-biz">
                 <div class="pricing-table-header">
                     <h2>{{ hotel.name }}</h2>
 

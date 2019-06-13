@@ -1,4 +1,4 @@
-package org.acme.hibernate.orm.panache;
+package org.lunatech.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 

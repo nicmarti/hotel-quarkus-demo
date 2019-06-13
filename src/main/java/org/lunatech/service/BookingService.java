@@ -1,7 +1,7 @@
-package org.acme.service;
+package org.lunatech.service;
 
 import io.vavr.control.Either;
-import org.acme.dto.BookingRequest;
+import org.lunatech.dto.BookingRequest;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,7 +14,7 @@ import javax.ws.rs.ext.Provider;
 
 /**
  * Service to create Booking request object.
- * Use application/json to aad
+ * Use application/json to deserialize object from the view.
  *
  * @author created by N.Martignole, Lunatech, on 2019-06-11.
  */

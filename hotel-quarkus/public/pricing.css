@@ -44,10 +44,10 @@ h2, h3 {
  */
 
 .banner {
-    background: transparent url('http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg') 0 0 no-repeat fixed;
+    background: transparent url('http://localhost:8080/assets/hotel_background.jpg') 0 0 no-repeat fixed;
     text-align: center;
     background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg', sizingMethod='scale');
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://localhost:8080/assets/hotel_background.jpg', sizingMethod='scale');
 
     height: 200px;
     width: 100%;
@@ -96,11 +96,11 @@ h2, h3 {
  * Choose a different color based on the type of pricing table.
  */
 .pricing-table-free .pricing-table-header {
-    background: #519251;
+    background: #925126;
 }
 
 .pricing-table-biz .pricing-table-header {
-    background: #2c4985;
+    background: #853b2c;
 }
 
 /*

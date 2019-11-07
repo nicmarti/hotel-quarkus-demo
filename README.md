@@ -5,7 +5,7 @@
 Back in 2009, JBoss Seam, Spring JSF and Play Framework 1 had a cool demo based on a simple Hotel & Booking reservation system.
 We decided to build a new version on top of [Quarkus](https://quarkus.io/). 
 The application has a simple backend, exposing a couple of endpoints over REST. 
-The project was bootstraped from [hibernate-orm-panache-resteasy demo].(https://github.com/quarkusio/quarkus-quickstarts/tree/master/hibernate-orm-panache-resteasy)
+The project was bootstraped from [hibernate-orm-panache-resteasy demo](https://github.com/quarkusio/quarkus-quickstarts/tree/master/hibernate-orm-panache-quickstart)
 
 While the code is surprisingly simple, under the hood this is using:
  - RESTEasy to expose the REST endpoints

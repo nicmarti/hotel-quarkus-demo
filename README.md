@@ -71,6 +71,10 @@ You can also build and package the frontend, then copy the generated files to th
 
 > cp -R dist/* ../src/main/resources/META-INF/resources/
 
+## CSS and grid 
+
+I use [PureCSS](https://purecss.io/) as a simple CSS framework for the user interface.
+
 ## Build the backend
 
 From the top directory hotel-quarkus-demo you can start the `package` target. The docker-maven-plugin starts a Docker 
@@ -99,7 +103,6 @@ Then run it:
 
 > java -jar ./target/hibernate-orm-panache-resteasy-1.0-SNAPSHOT-runner.jar
 
-
 ### Run Quarkus as a native application
 
 This same demo can be compiled into native code: no modifications required.
@@ -115,13 +118,12 @@ After getting a cup of coffee, you'll be able to run this binary directly:
 
 > ./target/hibernate-orm-panache-resteasy-1.0-SNAPSHOT-runner
 
-
 ## See the demo in your browser
 
 Navigate to: [http://localhost:8081](http://localhost:8081) this is the Vue.js frontend application. Please note that node will use port 8080 if the 
-java backend is not running.
+java backend is not running. Thus you should start the Java backend *before* the front node server.
 
-To see the backend in action : 
+To see the backend in action, you can call the /hotels end-point : 
 [http://localhost:8080/hotels](http://localhost:8080/hotels)
 
 # Photos credits

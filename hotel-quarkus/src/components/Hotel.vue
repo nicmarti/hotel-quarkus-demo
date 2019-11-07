@@ -13,7 +13,7 @@
                 <li>Air conditioning</li>
                 <li>Ensuite bathroom</li>
                 <li>Bath</li>
-                <li>Flat-scree TV</li>
+                <li>Flat-screen TV</li>
                 <li>Hairdryer</li>
                 <li>Towels</li>
                 <li>Mini-bar</li>
@@ -131,6 +131,7 @@
     .hotelSimple {
         padding: 20px 30px;
         border: 1px solid #cfcfcf;
+        margin-bottom: 20px;
     }
     .hotelDescription{
         text-align: justify;

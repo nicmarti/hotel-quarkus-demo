@@ -26,13 +26,13 @@
                 <fieldset>
                     <div v-if="formErrors.length" class="error">
                         <b>Please correct the following error(s):</b>
-                        <ul>
-                            <li v-for="error in formErrors">{{ error }}</li>
+                        <ul id="errorMsg">
+                            <li v-for="error in formErrors" v-bind:key="error.id">{{ error }}</li>
                         </ul>
                     </div>
                     <div v-if="formSuccess.length" class="success">
-                          <ul>
-                            <li v-for="msg in formSuccess">{{ msg }}</li>
+                          <ul id="successMsg">
+                            <li v-for="msg in formSuccess" v-bind:key="msg.id">{{ msg }}</li>
                         </ul>
                     </div>
                     <input type="hidden" name="hotelId" v-bind:value="hotel.hotelId">
@@ -110,7 +110,7 @@
                         currentObj.formErrors = [];
                         currentObj.formSuccess.push(response.data.result);
                     }).catch(function (error) {
-                        console.log("Server error "+ error.response);
+                        // console.log("Server error "+ error.response);
                         let reason = error.response.data.error;
                         currentObj.formErrors.push(reason);
                     });

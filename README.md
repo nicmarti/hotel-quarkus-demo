@@ -21,7 +21,8 @@ While the code is surprisingly simple, under the hood this is using:
 ## Requirements
 
 To compile and run this demo you will need:
-- GraalVM - see [our Building native image guide](https://quarkus.io/guides/building-native-image-guide)
+- JDL 8 with `JAVA_HOME` configured
+- GraalVM 19.2.1 - see [the Quarkus Building native image guide](https://quarkus.io/guides/building-native-image)
 - Apache Maven `3.5.3+`
 - npm v6.9.0+ for the frontend Vue.JS source code 
 - docker 
@@ -34,6 +35,8 @@ Installing GraalVM is very similar to installing any other JDK:
 just unpack it, add it to your path, and point the `JAVA_HOME`
 and `GRAALVM_HOME` environment variables to it.
 
+For Mac OS user you can use `homebreww`, see [the homebrew tap](https://github.com/graalvm/homebrew-tap)
+
 You should then use this JDK to run the Maven build.
 
 Note : there is a bug with Graal VM 0.16 and Quarkus 
@@ -41,6 +44,10 @@ Note : there is a bug with Graal VM 0.16 and Quarkus
 ## Database with Docker
 
 First we will need a PostgreSQL database; you can launch one easily if you have Docker installed:
+
+> eval $(docker-machine env default)
+
+then
 
 > docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:10.5
 
@@ -125,6 +132,35 @@ java backend is not running. Thus you should start the Java backend *before* the
 
 To see the backend in action, you can call the /hotels end-point : 
 [http://localhost:8080/hotels](http://localhost:8080/hotels)
+
+## GraalVM on Mac OS Catalina issue
+
+If you install GraalVM with [homebrew tap](https://github.com/graalvm/homebrew-tap) there is an issue reported with Calatina.
+GraalVM binaries are not (yet) notarized for macOS Catalina as reported in [this GraalVM issue](https://github.com/oracle/graal/issues/1724). 
+
+As a workaround you can execute this command :
+
+> xattr -r -d com.apple.quarantine  /Library/Java/JavaVirtualMachines/graalvm-ce-java8-19.3.1
+
+You should then be able to install `native-image`
+
+> ${GRAALVM_HOME}/bin/gu install native-image
+>
+If you need infos about your GraalVM setup with brew :
+
+> brew cask info graalvm/tap/graalvm-ce-java8
+>
+To use GraalVM CE, you may want to change your `JAVA_HOME`:
+
+> export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java8-19.3.1/Contents/Home
+
+or you may want to add its `bin` directory to your `PATH`:
+> export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java8-19.3.1/Contents/Home/bin:"$PATH"
+
+# Docker tips for Mac OS X and Windows
+
+There is a simple tip if you want to use localhost instead of the Docker IP address, is to use the port forwarding feature of VirtualBox.
+See [this tip](https://www.jhipster.tech/tips/020_tip_using_docker_containers_as_localhost_on_mac_and_windows.html)
 
 # Photos credits
 

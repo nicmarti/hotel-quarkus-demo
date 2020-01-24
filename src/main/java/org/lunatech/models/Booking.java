@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * An Hotel bookin made by a user.
+ * An Hotel booking made by a user.
  * This is inspired from JBoss Seam Hotel booking (2009...)
  *
  * @author created by N.Martignole, Lunatech, on 2019-06-05.

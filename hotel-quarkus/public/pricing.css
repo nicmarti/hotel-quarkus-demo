@@ -227,3 +227,13 @@ h2, h3 {
         font-size: 3em;
     }
 }
+
+.error {
+    background-color: #eba3aa;
+    padding: 3px;
+    margin: 4px;
+}
+
+.error b, .error li {
+    color: #8a160a;
+}

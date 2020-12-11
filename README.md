@@ -21,7 +21,7 @@ While the code is surprisingly simple, under the hood this is using:
 ## Requirements
 
 To compile and run this demo you will need:
-- JDL 8 with `JAVA_HOME` configured
+- JDK 8 with `JAVA_HOME` configured
 - GraalVM 19.2.1 - see [the Quarkus Building native image guide](https://quarkus.io/guides/building-native-image)
 - Apache Maven `3.5.3+`
 - npm v6.9.0+ for the frontend Vue.JS source code 
